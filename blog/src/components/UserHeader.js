@@ -7,13 +7,28 @@ class UserHeader extends React.Component {
         // see the <UserHeader /> in PostList.js
         this.props.fetchUser(this.props.userId);
     }
+    
     render() {
+        const { user } = this.props;
+        if (!user) return null;
         return (
-            <div>
-                User Header
+            <div className="header">
+                {user.name}
             </div>
         )
     }
 };
 
-export default connect(null, { fetchUser })(UserHeader);
+/*
+    ownProps object is a reference to the props that will
+    be sent to the component
+*/
+const mapStateToProps = (state, ownProps) => {
+    /*
+        state.users comes from the users key in our
+        combineReducers of our reducers directory
+    */
+    return { user: state.users.find(user => user.id === ownProps.userId) };
+}
+
+export default connect(mapStateToProps, { fetchUser })(UserHeader);
