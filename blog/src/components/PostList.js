@@ -11,13 +11,43 @@ class PostList extends React.Component {
         this.props.fetchPosts();
     }
 
+    renderList() {
+        return this.props.posts.map(post => {
+            return (
+                <div className="item" key={post.id}>
+                    <i className="large middle aligned icon user" />
+                    <div className="content">
+                        <div className="description">
+                            <h2>{post.title}</h2>
+                            <p>{post.body}</p>
+                        </div>
+                    </div>
+                </div>
+            );
+        });
+    }
+
     render() {
         return (
-            <div>
-                Post List
+            <div className="ui relaxed divided list">
+                {this.renderList()}
             </div>
         )
     }
+};
+
+/*
+    if we ever want to get data from
+    the redux side of our application, we need to 
+    define the mapStateToProps function and pass
+    it off to the connect function later in our component file
+*/
+const mapStateToProps = (state) => { // called with entire state object from redux store
+    /*
+    remember, we called postsReducer by 'posts'
+    in our combineReducers in the index.js of our reducers directory
+    */
+   return { posts: state.posts } 
 };
 
 /*
@@ -25,6 +55,6 @@ class PostList extends React.Component {
     reator with PostList component
 */
 export default connect(
-    null,
+    mapStateToProps,
     { fetchPosts: fetchPosts }
 )(PostList);
