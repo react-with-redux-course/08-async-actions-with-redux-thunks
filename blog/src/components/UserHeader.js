@@ -7,7 +7,6 @@ class UserHeader extends React.Component {
         // see the <UserHeader /> in PostList.js
         this.props.fetchUser(this.props.userId);
     }
-    
     render() {
         const { user } = this.props;
         if (!user) return null;

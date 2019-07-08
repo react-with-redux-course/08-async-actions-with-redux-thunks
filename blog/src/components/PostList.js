@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchPosts } from '../actions';
+import { fetchPostsAndUsers } from '../actions';
 import UserHeader from './UserHeader';
 
 class PostList extends React.Component {
@@ -9,7 +9,8 @@ class PostList extends React.Component {
         fetchPosts action creator will be called
     */
     componentDidMount() {
-        this.props.fetchPosts();
+        // this.props.fetchPosts();
+        this.props.fetchPostsAndUsers();
     }
 
     renderList() {
@@ -59,5 +60,5 @@ const mapStateToProps = (state) => { // called with entire state object from red
 */
 export default connect(
     mapStateToProps,
-    { fetchPosts: fetchPosts }
+    { fetchPostsAndUsers: fetchPostsAndUsers }
 )(PostList);
